@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, StyleSheet, Text, Alert, Switch, ActivityIndicator, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { View, TextInput, StyleSheet, Text, Alert, Switch, ActivityIndicator, TouchableOpacity, SafeAreaView, ScrollView, Platform } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useAuth } from './AuthContext';
 import { Ionicons } from '@expo/vector-icons';
@@ -138,6 +138,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F8F8F8',
+    marginTop: Platform.OS === 'android' ? 40 : 0,
+
   },
   content: {
     padding: 24,
