@@ -1,30 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    Modal,
-    ScrollView,
-    Alert,
-    TouchableOpacity,
-    ActivityIndicator,
-    Dimensions
-} from 'react-native';
-import {useAuth} from '../../AuthContext';
-import {BarCodeScanner} from 'expo-barcode-scanner';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Modal, ScrollView, Alert, TouchableOpacity, ActivityIndicator, Dimensions, SafeAreaView } from 'react-native';
+import { useAuth } from '../../AuthContext';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 import FeatureCard from '../../components/FeatureCard';
 import * as Crypto from 'expo-crypto';
 import config from "../../../config";
+import { StatusBar } from 'expo-status-bar';
 
 type BarCodeEvent = {
     type: string;
     data: string;
 };
 
-const SCANNER_SIZE = Math.min(Dimensions.get('window').width * 0.9, 350);
+const SCANNER_SIZE = 300;
 
 export default function CompanyHomeScreen() {
-    const {userInfo} = useAuth();
+    const { userInfo } = useAuth();
     const [hasPermission, setHasPermission] = useState<boolean | null>(null);
     const [scanned, setScanned] = useState(false);
     const [showScanner, setShowScanner] = useState(false);
@@ -33,12 +24,12 @@ export default function CompanyHomeScreen() {
 
     useEffect(() => {
         (async () => {
-            const {status} = await BarCodeScanner.requestPermissionsAsync();
+            const { status } = await BarCodeScanner.requestPermissionsAsync();
             setHasPermission(status === 'granted');
         })();
     }, []);
 
-    const handleBarCodeScanned = async ({type, data}: BarCodeEvent) => {
+    const handleBarCodeScanned = async ({ type, data }: BarCodeEvent) => {
         setScanStatus('scanning');
         console.log('QR Code escaneado... processando...');
 
@@ -51,7 +42,7 @@ export default function CompanyHomeScreen() {
             const scannedData = JSON.parse(data);
             console.log('Dados do QR Code parseados:', scannedData);
 
-            const {payload, signature} = scannedData;
+            const { payload, signature } = scannedData;
 
             console.log('Payload:', payload);
             console.log('Assinatura:', signature);
@@ -72,10 +63,10 @@ export default function CompanyHomeScreen() {
 
             if (scannerMode === 'visit' && !payload.type) {
                 console.log('Modo: Confirmação de visita');
-                Alert.alert('Visita autenticada com sucesso!', `Cliente: ${payload.client_name} (ID: ${payload.client_id})`, [{text: 'OK'}], {cancelable: true});
+                Alert.alert('Visita autenticada com sucesso!', `Cliente: ${payload.client_name} (ID: ${payload.client_id})`, [{ text: 'OK' }], { cancelable: true });
             } else if (scannerMode === 'loyalty' && payload.type === 'add_card_request') {
                 console.log('Modo: Geração de novo cartão fidelidade');
-                Alert.alert('Novo cartão Autnticado com sucesso!', `Cliente: ${payload.client_name} (ID: ${payload.client_id})`, [{text: 'OK'}], {cancelable: true});
+                Alert.alert('Novo cartão Autnticado com sucesso!', `Cliente: ${payload.client_name} (ID: ${payload.client_id})`, [{ text: 'OK' }], { cancelable: true });
             } else {
                 setTimeout(() => closeModal(), 500);
                 throw new Error('QR Code não compatível com a operação selecionada');
@@ -119,7 +110,7 @@ export default function CompanyHomeScreen() {
             case 'processing':
                 return (
                     <View style={styles.scanningOverlay}>
-                        <ActivityIndicator size="large" color="#fff"/>
+                        <ActivityIndicator size="large" color="#fff" />
                         <Text style={styles.scanningText}>
                             {scanStatus === 'scanning' ? 'Escaneando QR Code...' : 'Processando...'}
                         </Text>
@@ -144,19 +135,25 @@ export default function CompanyHomeScreen() {
     }
 
     return (
-        <ScrollView style={styles.container}>
-            <View style={styles.cardContainer}>
-                <FeatureCard
-                    icon="checkmark-circle-outline"
-                    title="Autenticar visita"
-                    onPress={() => openScanner('visit')}
-                />
-                <FeatureCard
-                    icon="card-outline"
-                    title="Autenticar cartão fidelidade"
-                    onPress={() => openScanner('loyalty')}
-                />
+        <SafeAreaView style={styles.container}>
+            <StatusBar style="dark" />
+            <View style={styles.content}>
+                <View style={styles.cardContainer}>
+                    <FeatureCard
+                        icon="qr-code-outline"
+                        title="Autenticar visita"
+                        onPress={() => openScanner('visit')}
+                        color="#4CAF50"
+                    />
+                    <FeatureCard
+                        icon="card-outline"
+                        title="Autenticar cartão fidelidade"
+                        onPress={() => openScanner('loyalty')}
+                        color="#2196F3"
+                    />
+                </View>
             </View>
+
             <Modal
                 animationType="fade"
                 transparent={true}
@@ -165,7 +162,7 @@ export default function CompanyHomeScreen() {
             >
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
-                        <View style={[styles.scannerContainer, {width: SCANNER_SIZE, height: SCANNER_SIZE}]}>
+                        <View style={[styles.scannerContainer, { width: SCANNER_SIZE, height: SCANNER_SIZE }]}>
                             {showScanner && (
                                 <BarCodeScanner
                                     onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
@@ -183,20 +180,25 @@ export default function CompanyHomeScreen() {
                     </View>
                 </View>
             </Modal>
-        </ScrollView>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#F5F5F5',
+    },
+    content: {
+        flex: 1,
+        padding: 20,
+        paddingTop: 20,
     },
     cardContainer: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-        padding: 16,
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'stretch',
+        gap: 20,
     },
     modalContainer: {
         flex: 1,
@@ -206,20 +208,24 @@ const styles = StyleSheet.create({
     },
     modalContent: {
         alignItems: 'center',
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 20,
     },
     scannerContainer: {
         overflow: 'hidden',
+        borderRadius: 10,
     },
     cancelButton: {
         marginTop: 20,
-        backgroundColor: 'white',
+        backgroundColor: '#FF5252',
         padding: 15,
+        borderRadius: 10,
+        width: SCANNER_SIZE,
         alignItems: 'center',
-        width: '50%', // Alterado para 50%
-        alignSelf: 'center', // Centraliza o botão
     },
     cancelButtonText: {
-        color: 'black',
+        color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
     },
@@ -235,7 +241,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     errorText: {
-        color: '#ff0000',
+        color: '#FF5252',
         fontSize: 18,
         textAlign: 'center',
         padding: 20,
