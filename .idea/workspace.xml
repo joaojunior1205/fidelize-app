@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="783f52fd-f873-4829-af30-05a60252d648" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(app)/client/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(app)/client/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(app)/client/home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(app)/client/home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(app)/company/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(app)/company/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(app)/company/home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(app)/company/home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(app)/company/layout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/FeatureCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/FeatureCard.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="783f52fd-f873-4829-af30-05a60252d648" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,7 +49,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1726323884334</updated>
-      <workItem from="1726323885387" duration="4122000" />
+      <workItem from="1726323885387" duration="4236000" />
     </task>
     <servers />
   </component>
