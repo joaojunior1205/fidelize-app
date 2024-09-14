@@ -65,9 +65,17 @@ export default function LoginScreen() {
     }
   };
 
+  const goBack = () => {
+    router.back();
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
+        <TouchableOpacity style={styles.backButton} onPress={goBack}>
+          <Ionicons name="arrow-back" size={24} color="#007AFF" />
+        </TouchableOpacity>
+
         <Text style={styles.title}>Fidelize</Text>
         <Text style={styles.subtitle}>Entrar como {type === 'user' ? 'Empresa' : 'Cliente'}</Text>
         
@@ -133,8 +141,9 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 24,
-    justifyContent: 'center',
-    minHeight: '100%',
+  },
+  backButton: {
+    marginBottom: 20,
   },
   title: {
     fontSize: 32,
