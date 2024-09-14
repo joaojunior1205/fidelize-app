@@ -3,6 +3,8 @@ import { View, StyleSheet, Modal, Text, TouchableOpacity, ScrollView } from 'rea
 import { useAuth } from '../../AuthContext';
 import QRCode from 'react-native-qrcode-svg';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import config from "../../../config";
+import * as Crypto from 'expo-crypto';
 
 type LoyaltyCard = {
   id: string;
@@ -30,6 +32,7 @@ export default function ClientHomeScreen() {
   const [selectedCard, setSelectedCard] = useState<LoyaltyCard | null>(null);
   const navigation = useNavigation();
   const route = useRoute();
+  const [qrData, setQrData] = useState('');
 
   useEffect(() => {
     fetchLoyaltyCards();
@@ -44,7 +47,7 @@ export default function ClientHomeScreen() {
 
   const fetchLoyaltyCards = async () => {
     try {
-      const response = await fetch(`http://192.168.1.77:9001/api/card/cards?client_id=${userInfo?.id}`);
+      const response = await fetch(`${config.apiUrl}/card/cards?client_id=${userInfo?.id}`);
       const data = await response.json();
       if (data.success) {
         setLoyaltyCards(data.data);
@@ -78,12 +81,38 @@ export default function ClientHomeScreen() {
     </TouchableOpacity>
   );
 
-  const qrData = JSON.stringify({
-    client_id: userInfo?.id,
-    client_name: userInfo?.name,
-    card_id: selectedCard?.id,
-    company_id: selectedCard?.company_id
-  });
+  const generateToken = async () => {
+    if (!selectedCard) return '';
+
+    const payload = {
+      client_id: userInfo?.id,
+      client_name: userInfo?.name,
+      card_id: selectedCard.id,
+      company_id: selectedCard.company_id,
+      timestamp: new Date().getTime()
+    };
+
+    const payloadString = JSON.stringify(payload);
+    const signature = await Crypto.digestStringAsync(
+      Crypto.CryptoDigestAlgorithm.SHA256,
+      payloadString + config.jwtSecret
+    );
+
+    const token = JSON.stringify({
+      payload: payload,
+      signature: signature
+    });
+
+    console.log('QR Code gerado com o seguinte conteúdo:', token);
+
+    return token;
+  };
+
+  useEffect(() => {
+    if (showQRCode && selectedCard) {
+      generateToken().then(token => setQrData(token));
+    }
+  }, [showQRCode, selectedCard]);
 
   return (
     <View style={styles.container}>
@@ -99,10 +128,14 @@ export default function ClientHomeScreen() {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <QRCode
-              value={qrData}
-              size={200}
-            />
+            {qrData ? (
+              <QRCode
+                value={qrData}
+                size={200}
+              />
+            ) : (
+              <Text>Gerando QR Code...</Text>
+            )}
             <Text style={styles.instruction}>Mostre este QR Code para a empresa</Text>
             <TouchableOpacity 
               style={styles.closeButton}

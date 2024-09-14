@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, Modal, ScrollView, Alert, TouchableOpacity } fr
 import { useAuth } from '../../AuthContext';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import FeatureCard from '../../components/FeatureCard';
+import * as Crypto from 'expo-crypto';
+import config from "../../../config";
 
 type BarCodeEvent = {
   type: string;
@@ -28,21 +30,51 @@ export default function CompanyHomeScreen() {
     })();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }: BarCodeEvent) => {
+  const handleBarCodeScanned = async ({ type, data }: BarCodeEvent) => {
+    console.log('Iniciando o escaneamento do QR Code...'); // Log antes do escaneamento
+
     setScanned(true);
     setShowScanner(false);
     try {
-      const scannedData: ClientData = JSON.parse(data);
-      console.log('Cliente escaneado:', scannedData);
+      console.log('QR Code escaneado. Dados brutos:', data); // Log dos dados brutos escaneados
+
+      const scannedData = JSON.parse(data);
+      console.log('Dados do QR Code parseados:', scannedData); // Log dos dados parseados
+
+      const { payload, signature } = scannedData;
+
+      console.log('Payload:', payload); // Log do payload
+      console.log('Assinatura:', signature); // Log da assinatura
+
+      // Verificar a assinatura
+      const payloadString = JSON.stringify(payload);
+      const calculatedSignature = await Crypto.digestStringAsync(
+        Crypto.CryptoDigestAlgorithm.SHA256,
+        payloadString + config.jwtSecret
+      );
+
+      console.log('Assinatura calculada:', calculatedSignature); // Log da assinatura calculada
+
+      if (calculatedSignature !== signature) {
+        console.log('Assinatura inválida'); // Log se a assinatura for inválida
+        throw new Error('Assinatura inválida');
+      }
+
+      console.log('Assinatura válida. Processando dados do cliente...'); // Log se a assinatura for válida
+
       if (scannerMode === 'visit') {
-        Alert.alert('Visita Confirmada', `Cliente: ${scannedData.name} (ID: ${scannedData.id})`);
+        console.log('Modo: Confirmação de visita');
+        Alert.alert('Visita Confirmada', `Cliente: ${payload.client_name} (ID: ${payload.client_id})`);
       } else {
-        Alert.alert('Cartão Fidelidade Gerado', `Para o cliente: ${scannedData.name} (ID: ${scannedData.id})`);
+        console.log('Modo: Geração de cartão fidelidade');
+        Alert.alert('Cartão Fidelidade Gerado', `Para o cliente: ${payload.client_name} (ID: ${payload.client_id})`);
       }
     } catch (error) {
       console.error('Erro ao processar QR Code:', error);
-      Alert.alert('Erro', 'QR Code inválido');
+      Alert.alert('Erro', 'QR Code inválido ou assinatura incorreta');
     }
+
+    console.log('Processamento do QR Code concluído.'); // Log após o processamento completo
   };
 
   const openScanner = (mode: 'visit' | 'loyalty') => {

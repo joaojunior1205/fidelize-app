@@ -1,9 +1,11 @@
 const ENV = {
   dev: {
     apiUrl: 'http://192.168.1.77:9001/api', // Updated with your IP address
+    jwtSecret: 'your_jwt_secret_here', // Substitua por uma chave secreta segura
   },
   prod: {
     apiUrl: 'https://seu-dominio-de-producao.com/api', // Update this when you have a production URL
+    jwtSecret: 'your_production_jwt_secret_here', // Substitua por uma chave secreta segura para produção
   },
 };
 
