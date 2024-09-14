@@ -7,7 +7,7 @@ import { Alert, View, Text, TouchableOpacity, StyleSheet, StatusBar } from 'reac
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { router } from 'expo-router';
 
-function CustomDrawerContent(props) {
+function CustomDrawerContent(props: any) {
   const { logout } = useAuth();
 
   const handleLogout = () => {
@@ -49,22 +49,15 @@ export default function ClientLayout() {
       <StatusBar barStyle="dark-content" backgroundColor="#f8f8f8" />
       <Drawer
         drawerContent={(props) => <CustomDrawerContent {...props} />}
-        screenOptions={({ navigation }) => ({
+        screenOptions={{
           header: ({ route }) => (
             <Header 
               title={route.name === 'home' ? 'Fidelize' : route.name} 
-              showAddButton={route.name === 'home'}
-              onAddPress={() => {
-                if (route.name === 'home') {
-                  navigation.setParams({ showQRCode: true });
-                }
-              }}
-              addButtonIcon="qr-code-outline"
             />
           ),
           drawerActiveTintColor: '#007AFF',
           drawerInactiveTintColor: '#333',
-        })}
+        }}
       >
         <Drawer.Screen 
           name="home" 

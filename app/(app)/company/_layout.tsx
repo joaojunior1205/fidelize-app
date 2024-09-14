@@ -3,11 +3,11 @@ import { Drawer } from 'expo-router/drawer';
 import Header from '../../components/Header';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../AuthContext';
-import { Alert, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Alert, View, Text, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { router } from 'expo-router';
 
-function CustomDrawerContent(props) {
+function CustomDrawerContent(props: any) {
   const { logout } = useAuth();
 
   const handleLogout = () => {
@@ -45,27 +45,30 @@ function CustomDrawerContent(props) {
 
 export default function CompanyLayout() {
   return (
-    <Drawer
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
-      screenOptions={{
-        header: ({ route }) => (
-          <Header title={route.name === 'home' ? 'Fidelize' : route.name} />
-        ),
-        drawerActiveTintColor: '#007AFF',
-        drawerInactiveTintColor: '#333',
-      }}
-    >
-      <Drawer.Screen 
-        name="home" 
-        options={{ 
-          drawerLabel: 'Fidelize',
-          title: 'Fidelize',
-          drawerIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
+    <>
+      <StatusBar barStyle="dark-content" backgroundColor="#f8f8f8" />
+      <Drawer
+        drawerContent={(props) => <CustomDrawerContent {...props} />}
+        screenOptions={{
+          header: ({ route }) => (
+            <Header title={route.name === 'home' ? 'Fidelize' : route.name} />
           ),
-        }} 
-      />
-    </Drawer>
+          drawerActiveTintColor: '#007AFF',
+          drawerInactiveTintColor: '#333',
+        }}
+      >
+        <Drawer.Screen 
+          name="home" 
+          options={{ 
+            drawerLabel: 'Fidelize',
+            title: 'Fidelize',
+            drawerIcon: ({ color, size }) => (
+              <Ionicons name="home" size={size} color={color} />
+            ),
+          }} 
+        />
+      </Drawer>
+    </>
   );
 }
 

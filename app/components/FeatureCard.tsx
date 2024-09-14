@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
     borderRadius: 8,
-    width: '48%', // Ajuste conforme necessário
-    aspectRatio: 1, // Mantém o card quadrado
+    width: '48%',
+    aspectRatio: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -33,14 +33,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 2,
     elevation: 3,
-    margin: '1%', // Ajuste conforme necessário
+    margin: '1%',
     padding: 10,
   },
   iconContainer: {
     marginBottom: 8,
   },
   cardText: {
-    fontSize: 14,
+    fontSize: 10, // Alterado para 10p
     color: '#555',
     textAlign: 'center',
   },
