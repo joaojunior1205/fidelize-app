@@ -233,6 +233,7 @@ export default function RegisterCompanyScreen() {
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
