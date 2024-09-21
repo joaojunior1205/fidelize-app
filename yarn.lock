@@ -1176,10 +1176,17 @@
   dependencies:
     cross-spawn "^7.0.3"
 
-"@expo/vector-icons@^14.0.0", "@expo/vector-icons@^14.0.2":
+"@expo/vector-icons@^14.0.0":
   version "14.0.2"
   resolved "https://registry.npmjs.org/@expo/vector-icons/-/vector-icons-14.0.2.tgz"
   integrity sha512-70LpmXQu4xa8cMxjp1fydgRPsalefnHaXLzIwaHMEzcZhnyjw2acZz8azRrZOslPVAWlxItOa2Dd7WtD/kI+CA==
+  dependencies:
+    prop-types "^15.8.1"
+
+"@expo/vector-icons@^14.0.3":
+  version "14.0.3"
+  resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-14.0.3.tgz#2e095118dadc0dac80a230bfa659949776b16d74"
+  integrity sha512-UJAKOXPPi6ez/1QZfoFVopCH3+c12Sw+T+IIVkvONCEN7zjN1fLxxWHkZ7Spz4WO5EH2ObtaJfCe/k4rw+ftxA==
   dependencies:
     prop-types "^15.8.1"
 
@@ -3996,11 +4003,6 @@ expo-status-bar@^1.12.1:
   resolved "https://registry.yarnpkg.com/expo-status-bar/-/expo-status-bar-1.12.1.tgz#52ce594aab5064a0511d14375364d718ab78aa66"
   integrity sha512-/t3xdbS8KB0prj5KG5w7z+wZPFlPtkgs95BsmrP/E7Q0xHXTcDcQ6Cu2FkFuRM+PKTb17cJDnLkawyS5vDLxMA==
 
-expo-status-bar@~1.12.1:
-  version "1.12.1"
-  resolved "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-1.12.1.tgz"
-  integrity sha512-/t3xdbS8KB0prj5KG5w7z+wZPFlPtkgs95BsmrP/E7Q0xHXTcDcQ6Cu2FkFuRM+PKTb17cJDnLkawyS5vDLxMA==
-
 expo-system-ui@~3.0.7:
   version "3.0.7"
   resolved "https://registry.npmjs.org/expo-system-ui/-/expo-system-ui-3.0.7.tgz"
@@ -4125,7 +4127,7 @@ fetch-retry@^4.1.1:
 "fidelize-app@file:.":
   version "1.0.0"
   dependencies:
-    "@expo/vector-icons" "^14.0.2"
+    "@expo/vector-icons" "^14.0.3"
     "@react-navigation/drawer" "^6.7.2"
     "@react-navigation/native" "^6.0.2"
     body-parser "^1.20.3"
@@ -4139,10 +4141,10 @@ fetch-retry@^4.1.1:
     expo-router "^3.5.23"
     expo-secure-store "~13.0.2"
     expo-splash-screen "~0.27.5"
-    expo-status-bar "~1.12.1"
+    expo-status-bar "^1.12.1"
     expo-system-ui "~3.0.7"
     expo-web-browser "~13.0.3"
-    fidelize-app "file:../../AppData/Local/Yarn/Cache/v6/npm-fidelize-app-1.0.0-061772ff-314d-4b72-afcc-5d3210268553-1726337994096/node_modules/fidelize-app"
+    fidelize-app "file:../../../.cache/yarn/v6/npm-fidelize-app-1.0.0-0559df3e-af55-481e-8409-7d767de745fe-1726929948997/node_modules/fidelize-app"
     jsonwebtoken "^9.0.2"
     react "18.2.0"
     react-dom "18.2.0"

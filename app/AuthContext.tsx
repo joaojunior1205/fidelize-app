@@ -1,6 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import * as SecureStore from 'expo-secure-store';
-import config from '../config';
 
 type UserType = 'user' | 'client';
 
@@ -13,7 +12,7 @@ type UserInfo = {
 type AuthContextType = {
   isAuthenticated: boolean;
   userInfo: UserInfo | null;
-  login: (email: string, password: string, type: UserType, rememberEmail: boolean) => Promise<void>;
+  login: (auth: object, type: UserType, rememberEmail: boolean, email: string) => Promise<void>;
   logout: () => Promise<void>;
   rememberedEmail: (type: UserType) => Promise<string | null>;
 };
@@ -31,6 +30,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const checkAuthStatus = async () => {
     const token = await SecureStore.getItemAsync('userToken');
     const storedUserInfo = await SecureStore.getItemAsync('userInfo');
+
     if (token && storedUserInfo) {
       setIsAuthenticated(true);
       setUserInfo(JSON.parse(storedUserInfo));
@@ -41,42 +41,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return await SecureStore.getItemAsync(`rememberedEmail_${type}`);
   };
 
-  const login = async (email: string, password: string, type: UserType, rememberEmail: boolean) => {
+  const login = async (auth, type: UserType, rememberEmail: boolean, email) => {
     try {
-      const endpoint = type === 'user' ? '/auth/login-user' : '/auth/login-client';
-      const url = `${config.apiUrl}${endpoint}`;
-      console.log('Attempting to fetch from:', url);
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      await SecureStore.setItemAsync('userToken', auth.data.tokens.refreshToken);
+      await SecureStore.setItemAsync('accessToken', auth.data.tokens.accessToken);
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('API Error:', errorText);
-        throw new Error(`Login failed: ${response.status} ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      console.log('API Response:', JSON.stringify(data, null, 2));
-
-      if (!data.success || !data.data || !data.data.token) {
-        throw new Error('Token not found in API response');
-      }
-
-      const tokenString = typeof data.data.token === 'string' ? data.data.token : JSON.stringify(data.data.token);
-      console.log('Token to be stored:', tokenString);
-
-      await SecureStore.setItemAsync('userToken', tokenString);
-      
       const newUserInfo: UserInfo = {
-        id: type === 'client' ? data.data.client.id : data.data.id,
-        name: type === 'client' ? data.data.client.name : data.data.name,
+        ...auth.data.user,
         type: type,
       };
+
       await SecureStore.setItemAsync('userInfo', JSON.stringify(newUserInfo));
       
       if (rememberEmail) {
@@ -89,10 +63,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUserInfo(newUserInfo);
     } catch (error) {
       console.error('Login error:', error);
-      if (error instanceof Error) {
-        console.error('Error message:', error.message);
-        console.error('Error stack:', error.stack);
-      }
       throw error;
     }
   };
