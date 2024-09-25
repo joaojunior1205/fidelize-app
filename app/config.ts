@@ -1,6 +1,6 @@
 const ENV = {
   dev: {
-    apiUrl: 'http://192.168.1.77:9001/api', // Update this with your actual development API URL
+    apiUrl: 'http://192.168.1.24:9001/api', // Update this with your actual development API URL
     jwtSecret: 'your_development_secret_key', // Adicione esta linha
   },
   prod: {

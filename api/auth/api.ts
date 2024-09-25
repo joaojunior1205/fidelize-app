@@ -3,10 +3,9 @@ import config from "@/config";
 type makeParams = {
     endpoint: string;
     method: string;
-    headers: object;
+    headers?: object;
     body?: object | null;
 }
-
 
 class Api {
     async makeFetch({endpoint, method, headers, body}: makeParams): Promise<any> {
@@ -24,7 +23,11 @@ class Api {
         const response = await fetch(`${config.apiUrl}${endpoint}`, init);
 
         if (response.ok) {
-            return response.json();
+            if (response?.status === 201) {
+                return {success: true}
+            }
+
+            return response?.json();
         } else {
             throw await response.json();
         }

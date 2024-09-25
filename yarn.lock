@@ -3998,11 +3998,6 @@ expo-splash-screen@0.27.5, expo-splash-screen@~0.27.5:
   dependencies:
     "@expo/prebuild-config" "7.0.6"
 
-expo-status-bar@^1.12.1:
-  version "1.12.1"
-  resolved "https://registry.yarnpkg.com/expo-status-bar/-/expo-status-bar-1.12.1.tgz#52ce594aab5064a0511d14375364d718ab78aa66"
-  integrity sha512-/t3xdbS8KB0prj5KG5w7z+wZPFlPtkgs95BsmrP/E7Q0xHXTcDcQ6Cu2FkFuRM+PKTb17cJDnLkawyS5vDLxMA==
-
 expo-system-ui@~3.0.7:
   version "3.0.7"
   resolved "https://registry.npmjs.org/expo-system-ui/-/expo-system-ui-3.0.7.tgz"
@@ -4141,10 +4136,9 @@ fetch-retry@^4.1.1:
     expo-router "^3.5.23"
     expo-secure-store "~13.0.2"
     expo-splash-screen "~0.27.5"
-    expo-status-bar "^1.12.1"
     expo-system-ui "~3.0.7"
     expo-web-browser "~13.0.3"
-    fidelize-app "file:../../../.cache/yarn/v6/npm-fidelize-app-1.0.0-0559df3e-af55-481e-8409-7d767de745fe-1726929948997/node_modules/fidelize-app"
+    fidelize-app "file:../../AppData/Local/Yarn/Cache/v6/npm-fidelize-app-1.0.0-c427d599-7d8a-4fa2-a5d8-93d9b43d3415-1727225103144/node_modules/fidelize-app"
     jsonwebtoken "^9.0.2"
     react "18.2.0"
     react-dom "18.2.0"

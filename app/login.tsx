@@ -4,7 +4,6 @@ import {
     TextInput,
     StyleSheet,
     Text,
-    Alert,
     Switch,
     ActivityIndicator,
     TouchableOpacity,
@@ -15,8 +14,6 @@ import {
 import {router, useLocalSearchParams} from 'expo-router';
 import {useAuth} from './AuthContext';
 import {Ionicons} from '@expo/vector-icons';
-import config from '../config';
-import ClientApi from "@/api/auth/client-api";
 import UserApi from "@/api/auth/user-api";
 
 export default function LoginScreen() {
@@ -26,36 +23,31 @@ export default function LoginScreen() {
     const [rememberEmail, setRememberEmail] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const {login, rememberedEmail} = useAuth();
-    const {type} = useLocalSearchParams<{ type: string }>();
 
     useEffect(() => {
-        const loadRememberedEmail = async () => {
-            const remembered = await rememberedEmail(type as 'user' | 'client');
-            if (remembered) {
-                setEmail(remembered);
-                setRememberEmail(true);
-            }
-        };
         loadRememberedEmail();
-    }, [type, rememberedEmail]);
+    }, [rememberedEmail]);
+
+    const loadRememberedEmail = async () => {
+        const remembered = await rememberedEmail();
+
+        if (remembered) {
+            setEmail(remembered);
+            setRememberEmail(true);
+        }
+    };
 
     const handleLogin = async () => {
         setIsLoading(true);
-
         try {
-            const clientApi = new ClientApi();
             const userApi = new UserApi();
 
-            const auth = type === 'user' ? await userApi.doLogin(email, password) : await clientApi.doLogin(email, password);
+            const auth = await userApi.doLogin(email, password);
 
             if (auth?.data?.tokens) {
-                await login(auth, type as 'user' | 'client', rememberEmail, email);
+                await login(auth, rememberEmail, email);
 
-                if (type === 'client') {
-                    router.replace('/(app)/client');
-                } else {
-                    router.replace('/(app)/company');
-                }
+                router.replace('/(app)/home');
             }
         } catch (error) {
             console.error('Login failed:', error);
@@ -76,7 +68,6 @@ export default function LoginScreen() {
                 </TouchableOpacity>
 
                 <Text style={styles.title}>Fidelize</Text>
-                <Text style={styles.subtitle}>Entrar como {type === 'user' ? 'Empresa' : 'Cliente'}</Text>
 
                 <View style={styles.inputContainer}>
                     <Ionicons name="mail-outline" size={24} color="#007AFF" style={styles.inputIcon}/>

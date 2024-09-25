@@ -1,12 +1,12 @@
-import { Redirect } from 'expo-router';
-import { useAuth } from './AuthContext';
+import {Redirect} from 'expo-router';
+import {useAuth} from './AuthContext';
 
 export default function Index() {
-  const { isAuthenticated, userInfo } = useAuth();
+    const {isAuthenticated, userInfo} = useAuth();
 
-  if (isAuthenticated && userInfo) {
-    return <Redirect href={`/(app)/${userInfo.type === 'client' ? 'client' : 'company'}`} />;
-  }
+    if (isAuthenticated && userInfo) {
+        return <Redirect href={'/(app)/home'}/>;
+    }
 
-  return <Redirect href="/choose-login-type" />;
+    return <Redirect href="/choose-login-type"/>;
 }
