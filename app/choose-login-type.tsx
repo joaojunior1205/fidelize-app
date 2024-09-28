@@ -1,7 +1,8 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Platform, StatusBar} from 'react-native';
-import {router} from 'expo-router';
+import {Redirect, router} from 'expo-router';
 import {Ionicons} from '@expo/vector-icons';
+import {useAuth} from "@/app/AuthContext";
 
 export default function ChooseLoginType() {
     const handleAction = (action: 'login' | 'register', type: 'user' | 'client') => {

@@ -15,6 +15,7 @@ type AuthContextType = {
     login: (auth: authType, rememberEmail: boolean, email: string) => Promise<void>;
     logout: () => Promise<void>;
     rememberedEmail: () => Promise<string | null>;
+    checkAuthStatus: () => Promise<void>;
 };
 
 type authType = { data: { tokens: { refreshToken: string, accessToken: string }, user: object } };
@@ -31,11 +32,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({children}
 
     const checkAuthStatus = async () => {
         const token = await SecureStore.getItemAsync('userToken');
-        const storedUserInfo = await SecureStore.getItemAsync('userInfo');
 
-        if (token && storedUserInfo) {
+        if (token) {
             setIsAuthenticated(true);
-            setUserInfo(JSON.parse(storedUserInfo));
+        } else {
+            setIsAuthenticated(false);
         }
     };
 
@@ -45,8 +46,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({children}
 
     const login = async (auth: authType, rememberEmail: boolean, email: string) => {
         try {
-            await SecureStore.setItemAsync('userToken', auth.data.tokens.refreshToken);
-            await SecureStore.setItemAsync('accessToken', auth.data.tokens.accessToken);
+            await SecureStore.setItemAsync('userToken', auth.data.tokens.accessToken);
+            await SecureStore.setItemAsync('tokenToRefresh', auth.data.tokens.refreshToken);
 
             const newUserInfo: object = {...auth.data.user};
 
@@ -74,7 +75,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({children}
     };
 
     return (
-        <AuthContext.Provider value={{isAuthenticated, userInfo, login, logout, rememberedEmail}}>
+        <AuthContext.Provider value={{isAuthenticated, userInfo, login, logout, rememberedEmail, checkAuthStatus}}>
             {children}
         </AuthContext.Provider>
     );

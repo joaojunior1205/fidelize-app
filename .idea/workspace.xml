@@ -5,28 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="783f52fd-f873-4829-af30-05a60252d648" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/api/auth/client-api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/(app)/clients.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/auth/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/auth/client-api.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/auth/user-api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth/user-api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(app)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(app)/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(app)/client-home.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(app)/client/_layout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(app)/client/home.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(app)/company-home.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(app)/company/_layout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(app)/company/home.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(app)/home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(app)/home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(app)/settings.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AuthContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AuthContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/_layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/choose-login-type.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/choose-login-type.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/register-client.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/register-company.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,19 +41,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/joao/Documentos/Projects/fidelize-app",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "ts.external.directory.path": "C:\\Users\\joaoj\\WebstormProjects\\fidelize-app\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/joao/Documentos/Projects/fidelize-app&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\joaoj\\WebstormProjects\\fidelize-app\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\joaoj\WebstormProjects\fidelize-app\app\(app)" />
@@ -90,7 +79,11 @@
       <workItem from="1726929791608" duration="5546000" />
       <workItem from="1726951272715" duration="41000" />
       <workItem from="1726951845709" duration="2071000" />
-      <workItem from="1727213808748" duration="11124000" />
+      <workItem from="1727213808748" duration="12050000" />
+      <workItem from="1727256735602" duration="592000" />
+      <workItem from="1727310047786" duration="632000" />
+      <workItem from="1727477252531" duration="11000" />
+      <workItem from="1727477570238" duration="12354000" />
     </task>
     <servers />
   </component>

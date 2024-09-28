@@ -11,7 +11,7 @@ import {
     ScrollView,
     Platform
 } from 'react-native';
-import {router, useLocalSearchParams} from 'expo-router';
+import {Redirect, router, useLocalSearchParams} from 'expo-router';
 import {useAuth} from './AuthContext';
 import {Ionicons} from '@expo/vector-icons';
 import UserApi from "@/api/auth/user-api";

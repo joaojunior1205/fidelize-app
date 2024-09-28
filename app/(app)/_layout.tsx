@@ -34,6 +34,7 @@ function CustomDrawerContent(props: any) {
             <DrawerContentScrollView {...props}>
                 <DrawerItemList {...props} />
             </DrawerContentScrollView>
+
             <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
                 <Ionicons name="log-out" size={24} color="#333"/>
                 <Text style={styles.logoutText}>Sair</Text>
@@ -64,9 +65,16 @@ export default function CompanyLayout() {
                     options={{
                         drawerLabel: 'Meu dia',
                         title: 'Meu dia',
-                        drawerIcon: ({color, size}) => (
-                            <Ionicons name="home" size={size} color={color}/>
-                        ),
+                        drawerIcon: ({color, size}) => (<Ionicons name="home" size={size} color={color}/>),
+                    }}
+                />
+
+                <Drawer.Screen
+                    name="clients"
+                    options={{
+                        drawerLabel: 'Clientes',
+                        title: 'Clientes',
+                        drawerIcon: ({color, size}) => (<Ionicons name="person" size={size} color={color}/>),
                     }}
                 />
             </Drawer>
