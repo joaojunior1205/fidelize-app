@@ -4,7 +4,7 @@ import {Stack} from "expo-router";
 export default function ClientLayout() {
     return (
         <>
-            <Stack screenOptions={{statusBarStyle: "dark"}}>
+            <Stack screenOptions={{statusBarStyle: undefined}}>
                 <Stack.Screen
                     name={"index"}
                     options={{

@@ -5,24 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="783f52fd-f873-4829-af30-05a60252d648" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/(app)/clients/_layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/(app)/clients/create-client.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/HeaderComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/buttons/LowerFloatingButton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/buttons/PrimaryButton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/input/InputBase.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/input/PhoneInputComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/input/TextInputComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/auth/client-api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth/client-api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(app)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(app)/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(app)/clients.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(app)/clients/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(app)/clients/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(app)/clients/_layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/colors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/colors.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/FeatureCard.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Header.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/choose-login-type.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/choose-login-type.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +83,7 @@
       <workItem from="1727310047786" duration="632000" />
       <workItem from="1727477252531" duration="11000" />
       <workItem from="1727477570238" duration="14848000" />
-      <workItem from="1727535052726" duration="15730000" />
+      <workItem from="1727535052726" duration="16136000" />
     </task>
     <servers />
   </component>
