@@ -3,16 +3,24 @@ import {
     View,
     Text,
     FlatList,
-    StyleSheet,
+    StyleSheet, ScrollView,
 } from 'react-native';
 import ClientApi from "@/api/auth/client-api";
-import colors from "../colors";
+import colors from "../../colors";
+import LowerFloatingButton from "@/app/components/buttons/LowerFloatingButton";
+import {router, useFocusEffect} from "expo-router";
 
 export default function ClientsScreen() {
     const [loading, setLoading] = React.useState(true);
     const [client, setClient] = React.useState(null);
 
     React.useEffect(() => {
+        getClient();
+    }, []);
+
+    const getClient = () => {
+        setLoading(true);
+
         const client = new ClientApi();
 
         client
@@ -20,10 +28,21 @@ export default function ClientsScreen() {
             .then(setClient)
             .catch(err => console.error(err))
             .finally(() => setLoading(false))
-    }, []);
+    }
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getClient();
+        }, [])
+    );
+
 
     if (loading) {
-        console.log('carregando...')
+        return (
+            <View>
+                <Text>Carregando...</Text>
+            </View>
+        )
     }
 
     return (
@@ -32,7 +51,12 @@ export default function ClientsScreen() {
                 data={client}
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}
-                renderItem={({ item }) => (
+                ListEmptyComponent={() => (
+                    <View>
+                        <Text>Empty State</Text>
+                    </View>
+                )}
+                renderItem={({item}) => (
                     <View style={styles.cardContainer}>
                         <Text style={styles.clientName}>
                             {item.name || '-'}
@@ -44,6 +68,14 @@ export default function ClientsScreen() {
                     </View>
                 )}
             />
+
+            <LowerFloatingButton
+                onPress={() => {
+                    router.push({
+                        pathname: "/clients/create-client",
+                        params: {}
+                    });
+                }}/>
         </View>
     )
 }

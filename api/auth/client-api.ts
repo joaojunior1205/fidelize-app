@@ -13,6 +13,14 @@ class ClientApi extends Api {
            method: "GET",
         });
     }
+
+    create(body: Object) {
+        return this.makeFetch({
+            endpoint,
+            method: "POST",
+            body,
+        })
+    }
 }
 
 export default ClientApi;
