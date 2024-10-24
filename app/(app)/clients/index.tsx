@@ -4,15 +4,17 @@ import {
     Text,
     FlatList,
     StyleSheet, ScrollView,
+    TouchableOpacity,
 } from 'react-native';
 import ClientApi from "@/api/auth/client-api";
 import colors from "../../colors";
 import LowerFloatingButton from "@/app/components/buttons/LowerFloatingButton";
 import {router, useFocusEffect} from "expo-router";
+import { IClient } from '@/app/@types/client-type';
 
 export default function ClientsScreen() {
     const [loading, setLoading] = React.useState(true);
-    const [client, setClient] = React.useState(null);
+    const [client, setClient] = React.useState<IClient[] | null>(null);
 
     React.useEffect(() => {
         getClient();
@@ -28,6 +30,17 @@ export default function ClientsScreen() {
             .then(setClient)
             .catch(err => console.error(err))
             .finally(() => setLoading(false))
+    }
+
+    const navigationToClientDetail = (client: IClient | null) => {
+        if (client === null) return;
+
+        router.push({
+            pathname: "/(app)/clients/client-detail",
+            params: {
+                client: JSON.stringify(client)
+            }
+        });
     }
 
     useFocusEffect(
@@ -57,7 +70,9 @@ export default function ClientsScreen() {
                     </View>
                 )}
                 renderItem={({item}) => (
-                    <View style={styles.cardContainer}>
+                    <TouchableOpacity 
+                        onPress={() => navigationToClientDetail(item)}
+                        style={styles.cardContainer}>
                         <Text style={styles.clientName}>
                             {item.name || '-'}
                         </Text>
@@ -65,7 +80,7 @@ export default function ClientsScreen() {
                         <Text style={styles.phoneNumber}>
                             {item?.phone || '-'}
                         </Text>
-                    </View>
+                    </TouchableOpacity>
                 )}
             />
 

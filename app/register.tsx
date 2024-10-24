@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     View,
     TextInput,
@@ -40,6 +40,10 @@ export default function RegisterCompanyScreen() {
         confirmPassword: '',
     });
 
+    useEffect(() => {
+        hasError();
+    }, [errors]);
+
     const validateCNPJ = (value: string) => {
         const unmaskedValue = value.replace(/[^\d]/g, '');
         if (unmaskedValue.length !== 14) {
@@ -78,6 +82,10 @@ export default function RegisterCompanyScreen() {
         }
     };
 
+    const hasError = () => {
+        return Object.values(errors).some(err => err);
+    };
+
     const handleEmailValidate = async () => {
         try {
             setIsLoading(true);
@@ -101,6 +109,11 @@ export default function RegisterCompanyScreen() {
             return;
         }
 
+        if (!code) {
+            Alert.alert('Atenção', 'Informe o código enviado para o e-mail informado no cadastro!');
+            return;
+        }
+
         const formData = {
             company: {
                 cnpj: cnpj.replace(/[^\d]/g, ''),
@@ -110,7 +123,6 @@ export default function RegisterCompanyScreen() {
                 name: responsibleName,
                 email: email,
                 password: password,
-                role: "ADMIN"
             },
             token: tokenToCode,
             code: code
@@ -246,7 +258,7 @@ export default function RegisterCompanyScreen() {
                     <TouchableOpacity
                         style={styles.registerButton}
                         onPress={handleEmailValidate}
-                        disabled={isLoading}
+                        disabled={isLoading || hasError()}
                     >
                         {isLoading ? (
                             <ActivityIndicator color="#ffffff"/>
@@ -278,7 +290,7 @@ export default function RegisterCompanyScreen() {
                     <TouchableOpacity
                         style={styles.registerButton}
                         onPress={handleRegister}
-                        disabled={isLoading}
+                        disabled={isLoading || hasError()}
                     >
                         {isLoading ? (
                             <ActivityIndicator color="#ffffff"/>

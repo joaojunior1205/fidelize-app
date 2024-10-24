@@ -17,6 +17,12 @@ export default function ClientLayout() {
                         title: "Cadastro de cliente",
                     }}
                 />
+                <Stack.Screen
+                    name={'client-detail'}
+                    options={{
+                        title: "Detalhes do cliente",
+                    }}
+                />
             </Stack>
         </>
     )
